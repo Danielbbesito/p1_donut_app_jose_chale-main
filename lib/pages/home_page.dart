@@ -19,18 +19,23 @@ class _HomePageState extends State<HomePage> {
   List<Widget> myTabs = [
     const MyTab(
       iconPath:"lib/icons/donut.png" ,
+      label: "Donuts",
       ),
     const MyTab(
       iconPath:"lib/icons/burger.png" ,
+      label: "Burgers",
       ),
     const MyTab(
       iconPath:"lib/icons/smoothie.png" ,
+      label: "Smothies",
       ),
     const MyTab(
       iconPath:"lib/icons/pancakes.png" ,
+      label: "Pancakes",
       ),
     const MyTab(
       iconPath:"lib/icons/pizza.png" ,
+      label: "Pizzas",
       ),
   ];
   @override
@@ -41,14 +46,14 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           leading: const Padding(
-            padding: const EdgeInsets.only(left: 24.0),
+            padding:  EdgeInsets.only(left: 24.0),
             child: Icon(
               Icons.menu,
               color: Colors.grey,
             ),
           ),
           actions: const [Padding(
-            padding: const EdgeInsets.only(right: 24.0),
+            padding:  EdgeInsets.only(right: 24.0),
             child: Icon(Icons.person),
           )],
         ),
