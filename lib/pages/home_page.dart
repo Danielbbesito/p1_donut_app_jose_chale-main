@@ -38,6 +38,37 @@ class _HomePageState extends State<HomePage> {
       label: "Pizzas",
       ),
   ];
+
+  // Estado del carrito
+  Map<String, int> cartItems = {};
+  double totalAmount = 0;
+
+  // Añadir artículo al carrito
+  void addToCart(String itemName, double itemPrice) {
+    setState(() {
+      if (cartItems.containsKey(itemName)) {
+        cartItems[itemName] = cartItems[itemName]! + 1;
+      } else {
+        cartItems[itemName] = 1;
+      }
+      totalAmount += itemPrice;
+    });
+  }
+
+  // Eliminar artículo del carrito
+  void removeFromCart(String itemName, double itemPrice) {
+    setState(() {
+      if (cartItems.containsKey(itemName)) {
+        if (cartItems[itemName] == 1) {
+          cartItems.remove(itemName);
+        } else {
+          cartItems[itemName] = cartItems[itemName]! - 1;
+        }
+        totalAmount -= itemPrice;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -71,15 +102,23 @@ class _HomePageState extends State<HomePage> {
         ),
           TabBar(tabs: myTabs),
 
-          const Expanded(
+          Expanded(
             child: TabBarView(children:[
-          DonutTab(),
-          BurgerTab(),
-          SmoothieTap(),
-          PancakeTab(),
-          PizzaTap()
-        ])
-          )
+          DonutTab(addToCart: addToCart, removeFromCart: removeFromCart),
+          BurgerTab(addToCart: addToCart, removeFromCart: removeFromCart),
+          SmoothieTab(addToCart: addToCart, removeFromCart: removeFromCart),
+          PanCakeTab(addToCart: addToCart, removeFromCart: removeFromCart),
+          PizzaTab(addToCart: addToCart, removeFromCart: removeFromCart)
+        ],
+        ),
+          ),
+
+        CartBar(
+              itemCount: cartItems.values.fold(0, (a, b) => a + b),
+              totalAmount: totalAmount,
+              onViewCartPressed: () {
+              },
+        ),
         ],
         ),
       ),

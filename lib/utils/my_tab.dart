@@ -21,7 +21,7 @@ class MyTab extends StatelessWidget {
         child: Image.asset(
           iconPath,
           color: Colors.grey[600],
-          height: 20,
+          height: 15,
         ),
       ),
       const SizedBox(height: 0,),
@@ -29,7 +29,7 @@ class MyTab extends StatelessWidget {
         label,
         style: TextStyle(
           color: Colors.grey[600],
-          fontSize: 7.3,
+          fontSize: 10.5,
           fontWeight: FontWeight.w500,
         ),
       ), 
@@ -37,4 +37,72 @@ class MyTab extends StatelessWidget {
   ),
   );
   }
+}
+
+
+class CartBar extends StatelessWidget {
+  final int itemCount;
+  final double totalAmount;
+  final VoidCallback onViewCartPressed;
+
+  const CartBar({
+    super.key,
+    required this.itemCount,
+    required this.totalAmount,
+    required this.onViewCartPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Información del carrito
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "$itemCount Items | \$${totalAmount.toStringAsFixed(2)}",
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                "Delivery Charges Included",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+          // Botón "View Cart"
+          ElevatedButton(
+            onPressed: onViewCartPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.pink,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            child: const Text(
+              "View Cart",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+     ),
+);
+}
 }
